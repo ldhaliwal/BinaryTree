@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 /**
  * An Integer Binary Search Tree
- * @author: Your Name Here
- * @version: Date
+ * @author: Liliana Dhaliwal
+ * @version: April 4, 2023
  */
 
 public class BST {
@@ -48,6 +48,28 @@ public class BST {
      */
     public boolean search(int val) {
         // TODO: Complete the search function
+
+        BSTNode current = root;
+
+        return searchHelp(current, val);
+    }
+
+    public boolean searchHelp(BSTNode current, int val){
+        // use greater and less than for the value and current
+
+        if(current.getVal() == val){
+            return true;
+        }
+        if(current.getLeft().equals(null) && current.getRight().equals(null)){
+            return false;
+        }
+
+        if(!current.getLeft().equals(null)){
+            return searchHelp(current.getLeft(), val);
+        }
+        if(!current.getRight().equals(null)){
+            return searchHelp(current.getRight(), val);
+        }
         return false;
     }
 
