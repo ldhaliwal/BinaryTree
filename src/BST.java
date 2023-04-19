@@ -48,22 +48,24 @@ public class BST {
      * @return true if val is in the tree, false otherwise
      */
     public boolean search(int val) {
-        // TODO: Complete the search function
-
         BSTNode current = root;
+
+        // Calls recursive method
         return searchHelp(current, val);
     }
 
     public boolean searchHelp(BSTNode current, int val){
-        // use greater and less than for the value and current
-
+        // Returns true if the desired node is found
         if(current.getVal() == val){
             return true;
         }
+        // Returns false if the desired node hasn't been found and there are no more nodes to explore
         if(current.getLeft() == null && current.getRight() == null){
             return false;
         }
 
+        // Calls recursive method on the next node based on if the desired node
+        // is greater or less than the current node in value
         if(current.getVal() > val){
             return searchHelp(current.getLeft(), val);
         }
@@ -77,18 +79,22 @@ public class BST {
      * @return ArrayList of BSTNodes in inorder
      */
     public ArrayList<BSTNode> getInorder() {
-        // TODO: Complete inorder traversal
         BSTNode current = root;
+        // Create an ArrayList to store the sorted nodes
         ArrayList<BSTNode> sorted = new ArrayList<>();
+
+        // Calls recursive method
         inorderHelp(current, sorted);
         return sorted;
     }
 
     public void inorderHelp(BSTNode current, ArrayList<BSTNode> sorted){
+        // Returns if there are no more nodes to explore
         if(current == null) {
             return;
         }
 
+        // Explores and adds nodes in inorder
         inorderHelp(current.getLeft(), sorted);
         sorted.add(current);
         inorderHelp(current.getRight(), sorted);
@@ -98,19 +104,23 @@ public class BST {
      * @return ArrayList of BSTNodes in preorder
      */
     public ArrayList<BSTNode> getPreorder() {
-        // TODO: Complete preorder traversal
         BSTNode current = root;
+        // Create an ArrayList to store the sorted nodes
         ArrayList<BSTNode> sorted = new ArrayList<>();
+
+        // Calls recursive method
         preorderHelp(current, sorted);
         return sorted;
     }
 
     public void preorderHelp(BSTNode current, ArrayList<BSTNode> sorted){
+        // Returns if there are no more nodes to explore
         if(current == null){
             return;
         }
-        sorted.add(current);
 
+        // Explores and adds nodes in preorder
+        sorted.add(current);
         preorderHelp(current.getLeft(), sorted);
         preorderHelp(current.getRight(), sorted);
     }
@@ -119,18 +129,22 @@ public class BST {
      * @return ArrayList of BSTNodes in postorder
      */
     public ArrayList<BSTNode> getPostorder() {
-        // TODO: Complete postorder traversal
         BSTNode current = root;
+        // Create an ArrayList to store the sorted nodes
         ArrayList<BSTNode> sorted = new ArrayList<>();
+
+        // Calls recursive method
         postorderHelp(current, sorted);
         return sorted;
     }
 
     public void postorderHelp(BSTNode current, ArrayList<BSTNode> sorted){
+        // Returns if there are no more nodes to explore
         if(current == null){
             return;
         }
 
+        // Explores and adds nodes in postorder
         postorderHelp(current.getLeft(), sorted);
         postorderHelp(current.getRight(), sorted);
         sorted.add(current);
@@ -143,26 +157,30 @@ public class BST {
      * @param val The value ot insert
      */
     public void insert(int val) {
-        // TODO: Complete insert
         BSTNode current = root;
+
+        // Calls recursive method
         insertHelp(val, current);
     }
 
     public void insertHelp(int val, BSTNode current){
+        // Returns if the node to insert is already in the tree
         if(current.getVal() == val){
             return;
         }
+        // Inserts the node when there are no more nodes to explore
         else if (current.getLeft() == null && current.getRight() == null) {
             if(current.getVal() > val){
-                //insert on the left
+                // Inserts the node on the left if it is less than the parent
                 current.setLeft(new BSTNode(val));
             }
             else{
-                //insert on the right
+                //Inserts the node on the right if it is greater than the parent
                 current.setRight(new BSTNode(val));
             }
         }
 
+        // Calls recursive method based on if the current node is less or greater than the node being inserted
         if(current.getVal() > val){
             insertHelp(val, current.getLeft());
         }
